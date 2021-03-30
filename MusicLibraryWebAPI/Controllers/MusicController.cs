@@ -20,7 +20,7 @@ namespace MusicLibraryWebAPI.Controllers
             _context = context;
         }
         // GET: api/<MusicController>
-        [Route("songs/getall")]
+        
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -38,8 +38,10 @@ namespace MusicLibraryWebAPI.Controllers
 
         // POST api/<MusicController>
         [HttpPost]
-        public IActionResult Post([FromBody] string value)
+        public IActionResult Post([FromBody] Song song)
         {
+            _context.Songs.Add(song);
+            _context.SaveChangesAsync();
             return Ok();
         }
 
