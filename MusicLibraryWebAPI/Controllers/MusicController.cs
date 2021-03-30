@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MusicLibraryWebAPI.Data;
+using MusicLibraryWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +14,17 @@ namespace MusicLibraryWebAPI.Controllers
     [ApiController]
     public class MusicController : ControllerBase
     {
+        private ApplicationDbContext _context;
+        public MusicController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         // GET: api/<MusicController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult GetAllSongs()
         {
-            return new string[] { "value1", "value2" };
+            var songs = _context.Songs.ToList();
+            return Ok(songs);
         }
 
         // GET api/<MusicController>/5
