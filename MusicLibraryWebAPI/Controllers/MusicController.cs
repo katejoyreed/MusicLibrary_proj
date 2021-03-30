@@ -20,8 +20,9 @@ namespace MusicLibraryWebAPI.Controllers
             _context = context;
         }
         // GET: api/<MusicController>
+        [Route("songs/getall")]
         [HttpGet]
-        public IActionResult GetAllSongs()
+        public IActionResult GetAll()
         {
             var songs = _context.Songs.ToList();
             return Ok(songs);
@@ -29,15 +30,17 @@ namespace MusicLibraryWebAPI.Controllers
 
         // GET api/<MusicController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            var songsById = _context.Songs.Where(x => x.id == id).FirstOrDefault();
+            return Ok(songsById);
         }
 
         // POST api/<MusicController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] string value)
         {
+            return Ok();
         }
 
         // PUT api/<MusicController>/5
