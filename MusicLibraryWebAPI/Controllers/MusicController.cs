@@ -56,8 +56,12 @@ namespace MusicLibraryWebAPI.Controllers
 
         // DELETE api/<MusicController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            Song song = _context.Songs.Where(x => x.id == id).FirstOrDefault();
+            _context.Songs.Remove(song);
+            _context.SaveChangesAsync();
+            return Ok(song);
         }
     }
 }
