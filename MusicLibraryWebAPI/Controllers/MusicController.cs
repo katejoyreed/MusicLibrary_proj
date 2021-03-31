@@ -42,7 +42,7 @@ namespace MusicLibraryWebAPI.Controllers
         {
             _context.Songs.Add(song);
             _context.SaveChangesAsync();
-            return Ok();
+            return CreatedAtAction(nameof(Get), new { id = song.id }, song);
         }
 
         // PUT api/<MusicController>/5
