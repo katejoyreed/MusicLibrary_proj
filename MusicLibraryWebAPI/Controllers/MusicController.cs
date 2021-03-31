@@ -24,7 +24,16 @@ namespace MusicLibraryWebAPI.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var songs = _context.Songs.ToList();
+            var songs = from s in _context.Songs
+                        select new SongDTO()
+                        {
+                            id = s.id,
+                            Title = s.Title,
+                            Album = s.Album,
+                            Artist = s.Artist,
+                            ReleaseDate = s.ReleaseDate
+                        };
+
             return Ok(songs);
         }
 
@@ -32,14 +41,28 @@ namespace MusicLibraryWebAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var songsById = _context.Songs.Where(x => x.id == id).FirstOrDefault();
+            var songsById = _context.Songs.Select(s => new SongDTO {
+                id = s.id,
+                Title = s.Title,
+                Album = s.Album,
+                Artist = s.Artist,
+                ReleaseDate = s.ReleaseDate
+            }).Where(x => x.id == id).FirstOrDefault();
             return Ok(songsById);
         }
 
         // POST api/<MusicController>
         [HttpPost]
-        public IActionResult Post([FromBody] Song song)
+        public IActionResult Post([FromBody] SongDTO songDTO)
         {
+            var song = new Song() 
+            { 
+                id = songDTO.id, 
+                Title = songDTO.Title, 
+                Album = songDTO.Album, 
+                Artist = songDTO.Artist, 
+                ReleaseDate = songDTO.ReleaseDate
+            };
             _context.Songs.Add(song);
             _context.SaveChangesAsync();
             return CreatedAtAction(nameof(Get), new { id = song.id }, song);
@@ -47,8 +70,16 @@ namespace MusicLibraryWebAPI.Controllers
 
         // PUT api/<MusicController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Song song)
+        public IActionResult Put(int id, [FromBody] SongDTO songDTO)
         {
+            var song = new Song()
+            {
+                id = songDTO.id,
+                Title = songDTO.Title,
+                Album = songDTO.Album,
+                Artist = songDTO.Artist,
+                ReleaseDate = songDTO.ReleaseDate
+            };
             _context.Entry(song).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _context.SaveChangesAsync();
             return Ok(song);
