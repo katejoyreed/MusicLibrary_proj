@@ -47,8 +47,11 @@ namespace MusicLibraryWebAPI.Controllers
 
         // PUT api/<MusicController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] Song song)
         {
+            _context.Entry(song).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChangesAsync();
+            return Ok(song);
         }
 
         // DELETE api/<MusicController>/5
