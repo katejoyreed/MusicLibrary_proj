@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "d9cf6466-9813-41af-853b-e46f6c3b54a2",
+		"name": "MusicLibraryAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44389/api/Music",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Just You And I\",\r\n    \"album\": \"Twin Peaks: The Musical\",\r\n    \"artist\": \"James Hurley\",\r\n    \"releaseDate\": \"1990-04-08T00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44389/api/Music",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44389",
+					"path": [
+						"api",
+						"Music"
+					]
+				},
+				"description": "Post Request"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44389/api/Music/0",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Just You And I\",\r\n    \"album\": \"Twin Peaks: The Musical\",\r\n    \"artist\": \"James Hurley\",\r\n    \"releaseDate\": \"2015-04-08T00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44389/api/Music/0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44389",
+					"path": [
+						"api",
+						"Music",
+						"0"
+					]
+				},
+				"description": "Put Request"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44389/api/Music",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44389/api/Music",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44389",
+					"path": [
+						"api",
+						"Music"
+					]
+				},
+				"description": "Get Request"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44389/api/Music/5",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44389/api/Music/5",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44389",
+					"path": [
+						"api",
+						"Music",
+						"5"
+					]
+				},
+				"description": "Get by id request"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44389/api/Music/5",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44389/api/Music/5",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44389",
+					"path": [
+						"api",
+						"Music",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
