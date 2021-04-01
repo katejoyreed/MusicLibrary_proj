@@ -72,17 +72,18 @@ namespace MusicLibraryWebAPI.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] SongDTO songDTO)
         {
-            var song = new Song()
+            var songConerted = _context.Songs.Select(s => new SongDTO
             {
-                id = songDTO.id,
-                Title = songDTO.Title,
-                Album = songDTO.Album,
-                Artist = songDTO.Artist,
-                ReleaseDate = songDTO.ReleaseDate
-            };
+                id = s.id,
+                Title = s.Title,
+                Album = s.Album,
+                Artist = s.Artist,
+                ReleaseDate = s.ReleaseDate
+            }).Where(x => x.id == id).FirstOrDefault();
+            Song song = _context.Songs.Where(x => x.id == songDTO.id).FirstOrDefault();
             _context.Entry(song).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _context.SaveChangesAsync();
-            return Ok(song);
+            return Ok(songDTO);
         }
 
         // DELETE api/<MusicController>/5
